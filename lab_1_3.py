@@ -43,7 +43,7 @@ def cipherPlayfair(tab):
     text = input("Введите сообщение: ")
     text=text.replace(" ", "") 
     i=0
-    while i<len(str1):
+    while i<len(text):
         loc=list()
         loc=locindex(text[i])
         loc1=list()
@@ -51,7 +51,7 @@ def cipherPlayfair(tab):
         if loc[1]==loc1[1]:
             print("{}{}".format(tab[(loc[0]-1)%5][loc[1]],tab[(loc1[0]-1)%5][loc1[1]]),end=' ')
         elif loc[0]==loc1[0]:
-            print("{}{}".format(tab[loc[0]][(loc[1]-1)%5],tab[loc1[0]][(loc1[1]-1)%5]),end=' ')  
+            print("{}{}".format(tab[loc[0]][(loc[1]+1)%6],tab[loc1[0]][(loc1[1] + 1)%6]),end=' ')  
         else:
             print("{}{}".format(tab[loc[0]][loc1[1]],tab[loc1[0]][loc[1]]),end=' ')    
         i=i+2
