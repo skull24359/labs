@@ -3,7 +3,7 @@ import itertools
 alphabet = "абвгдежзиклмнопрстуфхцчшщьыэюя"
 tab = []
 tab1 = []
-str1 = input("Введите строку: ")
+str1 = input("Введите ключ: ")
 str1 = ''.join(ch for ch, _ in itertools.groupby(str1))
 str2 = ""
 print(str1)
@@ -29,8 +29,32 @@ def createTab(alphabet):
             count += 1
     return tab
 
-def cipherPlayfair(tab):
+def locindex(c): #get location of each character
+    loc=list()
     
+    for i ,j in enumerate(tab):
+        for k,l in enumerate(j):
+            if c==l:
+                loc.append(i)
+                loc.append(k)
+                return loc
+
+def cipherPlayfair(tab):
+    text = input("Введите сообщение: ")
+    text=text.replace(" ", "") 
+    i=0
+    while i<len(str1):
+        loc=list()
+        loc=locindex(text[i])
+        loc1=list()
+        loc1=locindex(text[i+1])
+        if loc[1]==loc1[1]:
+            print("{}{}".format(tab[(loc[0]-1)%5][loc[1]],tab[(loc1[0]-1)%5][loc1[1]]),end=' ')
+        elif loc[0]==loc1[0]:
+            print("{}{}".format(tab[loc[0]][(loc[1]-1)%5],tab[loc1[0]][(loc1[1]-1)%5]),end=' ')  
+        else:
+            print("{}{}".format(tab[loc[0]][loc1[1]],tab[loc1[0]][loc[1]]),end=' ')    
+        i=i+2
 
 
 def printMatrix(tab):
@@ -41,5 +65,4 @@ def printMatrix(tab):
 
 tab = createTab(alphabet)
 printMatrix(tab)
-#clearText()
-#convertText()
+cipherPlayfair(tab)
